@@ -17,7 +17,16 @@ var config = {
 var database = firebase.database();
 
 var ref = database.ref('trains');
-var trains = [];
+var trains = {};
+
+var data = {
+	name: "Steve",
+	destination: "Truckee",
+	firstTrain: 0620,
+	frequency: 30
+}
+
+ref.push(trains);
 
 // Functions
 
@@ -32,9 +41,18 @@ function submitTrain(form) {
 $('form').submit(function(e){
 	e.preventDefault();
 	var $inputs = $('#newTrain :input:not(:button)');
+	// returns the four input paremeters - name, destination, first train, frequency
 	console.log($inputs);
-  	// var train = {
-  	// 	var name = $inputs[0].value,
+	// creates a new object to be stored in the database
+  	$inputs.each(function() {
+    var train = $(this)[0].id;
+    console.log(train);
+    trains[train] = $(this).val();
+    // trains[name] = $(this).val();
+    //  $(this).val('');
+   });
+  	console.log(trains);
+  // console.log(values);
   	// 	"destination" = $inputs[1].value,
   	// 	"firstTrain" = $inputs[2].value,
   	// 	"frequency" = $inputs[3].value
