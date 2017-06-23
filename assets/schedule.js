@@ -52,12 +52,9 @@ $('form').submit(function(e){
 	}
 
 	console.log(newTrain);
-	
+
 	database.ref().set({
-		name: newTrainName,
-		destination: newTrainDestination,
-		firstTrain: newTrainFirstTrain,
-		frequency: newTrainFrequency
+		train: newTrain
 	})
 	// database.ref().push({
 	// 	trainName: 			newTrainName,
