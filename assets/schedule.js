@@ -16,17 +16,16 @@ var config = {
 
 var database = firebase.database();
 
-var ref = database.ref('trains');
-var trains = {};
+// var clickCounter = 0;
 
-var data = {
-	name: "Steve",
-	destination: "Truckee",
-	firstTrain: 0620,
-	frequency: 30
-}
+// $("#demoButton").on("click", function(){
+// 	clickCounter++;
+// 	database.ref().set({
+// 		clickCount: clickCounter
+// 	})
+// });
 
-ref.push(trains);
+
 
 // Functions
 
@@ -40,18 +39,44 @@ function submitTrain(form) {
 
 $('form').submit(function(e){
 	e.preventDefault();
-	var $inputs = $('#newTrain :input:not(:button)');
+	var newTrainName = $("#name").val().trim();
+	var newTrainDestination = $("#destination").val().trim();
+	var newTrainFirstTrain = $("#firstTrain").val().trim();
+	var newTrainFrequency = $("#frequency").val().trim();
+	
+	var newTrain = {
+		name: newTrainName,
+		destination: newTrainDestination,
+		firstTrain: newTrainFirstTrain,
+		frequency: newTrainFrequency
+	}
+
+	console.log(newTrain);
+	
+	database.ref().set({
+		name: newTrainName,
+		destination: newTrainDestination,
+		firstTrain: newTrainFirstTrain,
+		frequency: newTrainFrequency
+	})
+	// database.ref().push({
+	// 	trainName: 			newTrainName,
+	// 	trainDestination: 	newTrainDestination,
+	// 	trainTime: 			newTrainFirstTrain,
+	// 	trainFrequency: 	newTrainFrequency 
+	})
+	// var $inputs = $('#newTrain :input:not(:button)');
 	// returns the four input paremeters - name, destination, first train, frequency
-	console.log($inputs);
-	// creates a new object to be stored in the database
-  	$inputs.each(function() {
-    var train = $(this)[0].id;
-    console.log(train);
-    trains[train] = $(this).val();
-    // trains[name] = $(this).val();
+	// console.log($inputs);
+	// // creates a new object to be stored in the database
+ //  	$inputs.each(function() {
+ //    var newTrain = $(this)[0].id;
+ //    console.log(newTrain);
+ //    trains[newTrain] = $(this).val();
+ //    // trains[name] = $(this).val();
     //  $(this).val('');
    });
-  	console.log(trains);
+  	
   // console.log(values);
   	// 	"destination" = $inputs[1].value,
   	// 	"firstTrain" = $inputs[2].value,
@@ -65,6 +90,4 @@ $('form').submit(function(e){
   //  });
   // console.log(values);
 
-})
-
-})
+// }
