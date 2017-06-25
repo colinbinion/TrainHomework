@@ -14,7 +14,7 @@ var config = {
   console.log(firebase);
 // Variables
 
-var database = firebase.database();
+var trainData = firebase.database();
 
 // var clickCounter = 0;
 
@@ -29,9 +29,6 @@ var database = firebase.database();
 
 // Functions
 
-function submitTrain(form) {
-
-}
 
 // Processes
 
@@ -51,11 +48,29 @@ $('form').submit(function(e){
 		frequency: newTrainFrequency
 	}
 
+	var row = $("<tr>");
+	var newNameElem = $("<td>").text(newTrainName);
+	console.log(newNameElem);
+	var newDestElem = $("<td>").val(newTrainDestination);
+	var newFirstElem = $("<td>").val(newTrainFirstTrain);
+	var newFreqElem = $("<td>").val(newTrainFrequency);
+
+	row.append(newNameElem);
+	row.append(newDestElem);
+	row.append(newFirstElem);
+	row.append(newFreqElem);
+
+	var trainTable = $("#trainTable tbody").append(row);
+
 	console.log(newTrain);
 
-	database.ref().set({
-		train: newTrain
-	})
+	trainData.ref().push(newTrain);
+
+	$("#name").val("");
+	$("#destination").val("");
+	$("#firstTrain").val("");
+	$("#frequency").val("");
+
 	// database.ref().push({
 	// 	trainName: 			newTrainName,
 	// 	trainDestination: 	newTrainDestination,

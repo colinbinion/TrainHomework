@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="assets/css/myStyle.css">
 	<!-- Latest compiled and minified JS -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<!-- moment js file -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="assets/schedule.js"></script>
 	<!-- Firebase -->
 	<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
@@ -30,7 +32,7 @@
 			</div>
 			<div class="panel-body">
 			<button id="demoButton">CLICK HERE DAMNIT</button>
-				<table class="table table-hover">
+				<table class="table table-hover" id="trainTable">
 					<thead>
 						<tr>
 							<th><b>Train Name</b></th>
@@ -41,13 +43,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
+						<!-- dynamically created rows go here -->
 					</tbody>
 				</table>
 			</div>
