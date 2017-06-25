@@ -16,6 +16,10 @@ var config = {
 
 var trainData = firebase.database();
 
+// variables for moment js 
+var randomDate = "01/23/2014";
+var convertedDate = moment(new Date(randomDate));
+console.log(convertedDate);
 // var clickCounter = 0;
 
 // $("#demoButton").on("click", function(){
@@ -45,10 +49,11 @@ $('form').submit(function(e){
 		name: newTrainName,
 		destination: newTrainDestination,
 		firstTrain: newTrainFirstTrain,
-		frequency: newTrainFrequency
+		frequency: newTrainFrequency,
 		dateAdded: firebase.database.ServerValue.TIMESTAMP
 	}
 
+	// populate the train schedule with the new values
 	var row = $("<tr>");
 	var newNameElem = $("<td>").text(newTrainName);
 	console.log(newNameElem);
@@ -68,10 +73,13 @@ $('form').submit(function(e){
 	trainData.ref().push(newTrain);
 
 	// take a snapshot of the database
-	trainData.ref().on("child_added", function(childSnapshot){
+	trainData.ref().on("child_added", function(childSnapshot, prevChildKey){
+		console.log(childSnapshot).val().name;
+		console.log(childSnapshot).val().destination;
+		console.log(childSnapshot).val().firstTrain;
+		console.log(childSnapshot).val().frequency;
+		console.log(childSnapshot).val().dateAdded;
 
-
-		
 	})
 
 	// $("#name").val("");
