@@ -46,14 +46,15 @@ $('form').submit(function(e){
 		destination: newTrainDestination,
 		firstTrain: newTrainFirstTrain,
 		frequency: newTrainFrequency
+		dateAdded: firebase.database.ServerValue.TIMESTAMP
 	}
 
 	var row = $("<tr>");
 	var newNameElem = $("<td>").text(newTrainName);
 	console.log(newNameElem);
-	var newDestElem = $("<td>").val(newTrainDestination);
-	var newFirstElem = $("<td>").val(newTrainFirstTrain);
-	var newFreqElem = $("<td>").val(newTrainFrequency);
+	var newDestElem = $("<td>").text(newTrainDestination);
+	var newFirstElem = $("<td>").text(newTrainFirstTrain);
+	var newFreqElem = $("<td>").text(newTrainFrequency);
 
 	row.append(newNameElem);
 	row.append(newDestElem);
@@ -66,10 +67,17 @@ $('form').submit(function(e){
 
 	trainData.ref().push(newTrain);
 
-	$("#name").val("");
-	$("#destination").val("");
-	$("#firstTrain").val("");
-	$("#frequency").val("");
+	// take a snapshot of the database
+	trainData.ref().on("child_added", function(childSnapshot){
+
+
+		
+	})
+
+	// $("#name").val("");
+	// $("#destination").val("");
+	// $("#firstTrain").val("");
+	// $("#frequency").val("");
 
 	// database.ref().push({
 	// 	trainName: 			newTrainName,
