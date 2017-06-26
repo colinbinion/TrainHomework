@@ -20,6 +20,13 @@ var trainData = firebase.database();
 var randomDate = "01/23/2014";
 var convertedDate = moment(new Date(randomDate));
 console.log(convertedDate);
+
+// ensuring moment js is connected and working
+var m = moment();
+console.log(m);
+console.log(m.toString());
+var ts = Date.now();
+console.log(ts);
 // var clickCounter = 0;
 
 // $("#demoButton").on("click", function(){
@@ -42,7 +49,8 @@ $('form').submit(function(e){
 	e.preventDefault();
 	var newTrainName = $("#name").val().trim();
 	var newTrainDestination = $("#destination").val().trim();
-	var newTrainFirstTrain = $("#firstTrain").val().trim();
+	var newTrainFirstTrain = moment($("#firstTrain").val().trim(), "HH:mm").subtract(10, "years").format("X");
+	console.log(newTrainFirstTrain);
 	var newTrainFrequency = $("#frequency").val().trim();
 	
 	var newTrain = {
@@ -68,19 +76,40 @@ $('form').submit(function(e){
 
 	var trainTable = $("#trainTable tbody").append(row);
 
+	//clear the input fields
+	$('#name').val("");
+	$('#destination').val("");
+	$('#firstTrain').val("");
+	$('#frequency').val("");
+
 	console.log(newTrain);
 
 	trainData.ref().push(newTrain);
 
 	// take a snapshot of the database
-	trainData.ref().on("child_added", function(childSnapshot, prevChildKey){
-		console.log(childSnapshot).val().name;
-		console.log(childSnapshot).val().destination;
-		console.log(childSnapshot).val().firstTrain;
-		console.log(childSnapshot).val().frequency;
-		console.log(childSnapshot).val().dateAdded;
+	// trainData.ref().on("child_added", function(childSnapshot, prevChildKey){
 
-	})
+	// 	console.log(childSnapshot).val();
+
+	// 	// console.log(childSnapshot).val().name;
+	// 	// console.log(childSnapshot).val().destination;
+	// 	// console.log(childSnapshot).val().firstTrain;
+	// 	// console.log(childSnapshot).val().frequency;
+	// 	// console.log(childSnapshot).val().dateAdded;
+
+	// })
+
+	var currentTime = moment();
+	console.log(currentTime).format;
+
+	var differenceTimes = moment().diff(moment.unix(newTrainFirstTrain), "minutes");
+	var tRemainder = moment().diff(moment.unix(newTrainFirstTrain), "minutes") % newTrainFrequency ;
+	var tMinutes = newTrainFrequency - tRemainder;
+
+
+
+
+
 
 	// $("#name").val("");
 	// $("#destination").val("");
