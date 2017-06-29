@@ -1,6 +1,10 @@
 $(document).ready(function(){
 
 // Initialize firebase database
+function myfunction(a, b) {
+  var tubor = a + b;
+  return tubor;
+}
 
 var config = {
     apiKey: "AIzaSyDfj5XTDTqwDJluv_VrQMARF2TkgNzfqsg",
@@ -16,7 +20,7 @@ var config = {
 
 var trainData = firebase.database();
 
-// variables for moment js 
+// variables for moment js
 var randomDate = "01/23/2014";
 var convertedDate = moment(new Date(randomDate));
 console.log(convertedDate);
@@ -52,7 +56,7 @@ $('form').submit(function(e){
 	var newTrainFirstTrain = moment($("#firstTrain").val().trim(), "HH:mm").subtract(10, "years").format("X");
 	console.log(newTrainFirstTrain);
 	var newTrainFrequency = $("#frequency").val().trim();
-	
+
 	var newTrain = {
 		name: newTrainName,
 		destination: newTrainDestination,
@@ -120,7 +124,7 @@ $('form').submit(function(e){
 	// 	trainName: 			newTrainName,
 	// 	trainDestination: 	newTrainDestination,
 	// 	trainTime: 			newTrainFirstTrain,
-	// 	trainFrequency: 	newTrainFrequency 
+	// 	trainFrequency: 	newTrainFrequency
 	})
 	// var $inputs = $('#newTrain :input:not(:button)');
 	// returns the four input paremeters - name, destination, first train, frequency
@@ -133,7 +137,7 @@ $('form').submit(function(e){
  //    // trains[name] = $(this).val();
     //  $(this).val('');
    });
-  	
+
   // console.log(values);
   	// 	"destination" = $inputs[1].value,
   	// 	"firstTrain" = $inputs[2].value,
